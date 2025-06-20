@@ -1,0 +1,26 @@
+name: Deploy ScaryApp to QA Environment
+
+on:
+  push:
+    branches:
+      - staging
+  pull_request:
+    branches:
+      - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+    permissions:
+      deployments: write
+    steps:
+      - uses: JorgeLNJunior/render-deploy@v1.4.5
+        with:
+          service_id: ${{ secrets.RENDER_SERVICE_ID }}
+          api_key: ${{ secrets.RENDER_API_KEY }}
+          clear_cache: true # Optional: Clear Render's build cache
+          wait_deploy: true
+          github_deployment: true
+          deployment_environment: 'production'
+          github_token: ${{ secrets.TOKEN_GTH }}

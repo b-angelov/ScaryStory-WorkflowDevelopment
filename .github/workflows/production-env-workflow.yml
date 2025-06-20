@@ -3,15 +3,15 @@ name: Deploy ScaryApp to QA Environment
 on:
   push:
     branches:
-      - QA
+      - main
   pull_request:
     branches:
-      - QA
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: QA
+    environment: production
     permissions:
       deployments: write
     steps:
